@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI & Automations Portfolio - AX Creative</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="automations.css">
+</head>
+
+<body>
+  <!-- NavBar -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Page Heading -->
+  <section class="page-heading">
+    <span class="sub-text">OUR WORK</span>
+    <span class="main-text">AI & Automations</span>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section class="portfolio" id="portfolio-section">
+    <!-- JS will inject categories and cards -->
+  </section>
+
+  <!-- Modal -->
+  <div id="portfolioModal" class="portfolio-modal">
+    <div class="modal-content">
+      <button class="close" onclick="closeModal()" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <img id="modalImg" src="" alt="Project Image">
+      <h2 id="modalTitle"></h2>
+      <p id="modalDesc"></p>
+      <div id="modalStack" class="tech-stack"></div>
+      <a id="modalLink" href="#" target="_blank" class="view-live-btn">View Live</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div id="footer-placeholder"></div>
+
+  <script>
+    // ===== Project Data =====
+    const projects = {
+      "AI Chatbots": [
+        {
+          title: "Customer Support Bot",
+          desc: "24/7 chatbot handling FAQs and support queries.",
+          img: "images/Development/Alpha.png",
+          stack: ["AI", "NLP", "Dialogflow"],
+          link: "#"
+        },
+        {
+          title: "E-commerce Sales Bot",
+          desc: "Conversational bot to recommend products and boost sales.",
+          img: "images/Development/Alpha.png",
+          stack: ["AI", "TensorFlow", "Node.js"],
+          link: "#"
+        }
+      ],
+      "Business Automations": [
+        {
+          title: "Workflow Automation",
+          desc: "Streamlined task management for internal teams.",
+          img: "images/Development/Alpha.png",
+          stack: ["Python", "Zapier", "APIs"],
+          link: "#"
+        },
+        {
+          title: "Invoice Automation",
+          desc: "Automated billing and payment workflows.",
+          img: "images/Development/Alpha.png",
+          stack: ["AI", "OCR", "Node.js"],
+          link: "#"
+        }
+      ],
+      "Custom AI Solutions": [
+        {
+          title: "Predictive Analytics",
+          desc: "AI model for customer behavior prediction.",
+          img: "images/Development/Alpha.png",
+          stack: ["Python", "Scikit-learn", "Pandas"],
+          link: "#"
+        },
+        {
+          title: "Computer Vision App",
+          desc: "Image recognition system for retail.",
+          img: "images/Development/Alpha.png",
+          stack: ["AI", "OpenCV", "PyTorch"],
+          link: "#"
+        }
+      ]
+    };
+
+    // ===== Render Projects =====
+    const portfolioSection = document.getElementById("portfolio-section");
+
+    Object.keys(projects).forEach((category, categoryIndex) => {
+      const categoryTitle = document.createElement("h2");
+      categoryTitle.className = "category-title";
+      categoryTitle.textContent = category;
+      portfolioSection.appendChild(categoryTitle);
+
+      const grid = document.createElement("div");
+      grid.className = "portfolio-grid";
+
+      projects[category].forEach((project, projectIndex) => {
+        const card = document.createElement("div");
+        card.className = "portfolio-card";
+        card.innerHTML = `
+      <img src="${project.img}" alt="${project.title}">
+      <h3>${project.title}</h3>
+      <p>${project.desc}</p>
+      <a href="#" class="btn">View Details</a>
+    `;
+
+        // Button → Modal
+        card.querySelector(".btn").addEventListener("click", (e) => {
+          e.preventDefault();
+          openModal(project.title, project.desc, project.img, project.stack, project.link);
+        });
+        grid.appendChild(card);
+      });
+
+      portfolioSection.appendChild(grid);
+    });
+
+    // ===== Modal Functions =====
+    function openModal(title, desc, img, stack = [], link = "#") {
+      document.getElementById("modalTitle").innerText = title;
+      document.getElementById("modalDesc").innerText = desc;
+      document.getElementById("modalImg").src = img;
+      document.getElementById("modalStack").innerHTML =
+        stack.map(t => `<span class="badge">${t}</span>`).join("");
+      document.getElementById("modalLink").href = link;
+      document.getElementById("portfolioModal").classList.add("show");
+    }
+
+    function closeModal() {
+      document.getElementById("portfolioModal").classList.remove("show");
+    }
+
+    const modal = document.getElementById("portfolioModal");
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+
+    // ===== Scroll Animations =====
+    function animateOnScroll() {
+      const categoryTitles = document.querySelectorAll('.category-title');
+      const portfolioCards = document.querySelectorAll('.portfolio-card');
+
+      // Animate category titles
+      categoryTitles.forEach((title, index) => {
+        const titlePosition = title.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight * 0.85;
+
+        if (titlePosition < screenPosition) {
+          title.style.transitionDelay = `${index * 0.2}s`;
+          title.classList.add('animate');
+        }
+      });
+
+      // Animate portfolio cards with staggered delay
+      portfolioCards.forEach((card, index) => {
+        const cardPosition = card.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight * 0.85;
+
+        if (cardPosition < screenPosition) {
+          card.style.animationDelay = `${(index % 4) * 0.1}s`;
+          card.classList.add('animate');
+        }
+      });
+    }
+
+    // Initialize animations
+    document.addEventListener('DOMContentLoaded', function () {
+      setTimeout(animateOnScroll, 100);
+      window.addEventListener('scroll', animateOnScroll);
+    });
+
+    // Load footer dynamically
+    fetch("footer.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("footer-placeholder").innerHTML = data;
+      });
+
+    // Load navbar dynamically
+    fetch("navbar.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("navbar-placeholder").innerHTML = data;
+        const script = document.createElement("script");
+        script.src = "navbar.js";
+        document.body.appendChild(script);
+      });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+    /* adjust based on nav height */
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #fff;
+    color: #111;
+    overflow-x: hidden;
+}
+
+/* ==============================
+   HERO SECTION
+============================== */
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 75vh;
+    text-align: center;
+    padding-top: 80px;
+}
+
+.hero h1 {
+    font-size: 70px;
+    font-weight: 300;
+    color: #aaa;
+    transition: transform 0.3s ease-out;
+    margin: 0;
+}
+
+.hero h2 {
+    font-size: 80px;
+    font-weight: 800;
+    color: #111;
+    margin-top: -10px;
+    transition: transform 0.3s ease-out;
+}
+
+/* ===== CALL TO ACTION (ABOUT SECTION) ===== */
+.about-section {
+    text-align: center;
+    padding: 80px 20px;
+    background: #fff;
+    /* keep it white to match theme */
+}
+
+.about-text {
+    font-size: 26px;
+    font-weight: 500;
+    color: #767474;
+    margin-bottom: 30px;
+    line-height: 1.4;
+}
+
+.about-text span {
+    color: #2a2a2a;
+    /* subtle highlight */
+    font-weight: 700;
+}
+
+.btn-about {
+    display: inline-block;
+    padding: 12px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 30px;
+    border: 1px solid #000;
+    transition: all 0.3s ease;
+}
+
+.btn-about:hover {
+    background: #fff;
+    color: #000;
+}

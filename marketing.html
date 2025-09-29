@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing Portfolio - AX Creative</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="marketing.css">
+</head>
+
+<body>
+    <!-- NavBar -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Page Heading -->
+    <section class="page-heading">
+        <span class="sub-text">[ OUR ]</span>
+        <span class="main-text">Marketing Services</span>
+    </section>
+
+    <!-- Marketing Services Grid -->
+    <section class="marketing-grid" id="marketingContainer">
+        <!-- Services will be dynamically inserted here -->
+    </section>
+
+    <!-- Case Studies Section -->
+    <section class="case-studies">
+        <div class="case-studies-heading">
+            <h2>Marketing Success Stories</h2>
+            <p>Real results from our strategic marketing campaigns</p>
+        </div>
+        <div class="case-studies-grid" id="caseStudiesContainer">
+            <!-- Case studies will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="marketing-cta">
+        <h2>Ready to Transform Your Marketing?</h2>
+        <p>Let's create a strategy that drives real results for your business</p>
+        <a href="become-a-client.html" class="cta-button">Start Your Project</a>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="marketing.js"></script>
+    <script>
+        // Marketing services data
+        
+
+        // Case studies data
+        const caseStudies = [
+            {
+                image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                category: "E-commerce",
+                title: "Fashion Brand Social Media Growth",
+                description: "Increased social media engagement by 300% and drove 45% more online sales through strategic content and paid campaigns.",
+                results: {
+                    engagement: "+300%",
+                    growth: "+45%",
+                    roi: "5.2x"
+                }
+            },
+            {
+                image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                category: "SaaS",
+                title: "B2B Lead Generation Campaign",
+                description: "Generated 1200+ qualified leads through targeted content marketing and LinkedIn advertising strategies.",
+                results: {
+                    engagement: "+180%",
+                    growth: "+65%",
+                    roi: "8.1x"
+                }
+            },
+            {
+                image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80",
+                category: "Healthcare",
+                title: "Local SEO Dominance",
+                description: "Achieved #1 rankings for 25+ key search terms, increasing organic traffic by 400% in 6 months.",
+                results: {
+                    engagement: "+220%",
+                    growth: "+400%",
+                    roi: "12.3x"
+                }
+            }
+        ];
+
+        // Render marketing services
+        function renderMarketingServices() {
+            const container = document.getElementById('marketingContainer');
+            marketingServices.forEach((service, index) => {
+                const serviceCard = document.createElement('div');
+                serviceCard.className = 'service-card';
+                serviceCard.innerHTML = `
+                    <div class="service-icon">${service.icon}</div>
+                    <h3>${service.title}</h3>
+                    <p>${service.description}</p>
+                    <ul class="service-features">
+                        ${service.features.map(feature => `<li>${feature}</li>`).join('')}
+                    </ul>
+                `;
+
+                // Add animation delay
+                setTimeout(() => {
+                    serviceCard.classList.add('animate');
+                }, 100 + (index * 150));
+
+                container.appendChild(serviceCard);
+            });
+        }
+
+        // Render case studies
+        function renderCaseStudies() {
+            const container = document.getElementById('caseStudiesContainer');
+            caseStudies.forEach((caseStudy, index) => {
+                const caseCard = document.createElement('div');
+                caseCard.className = 'case-card';
+                caseCard.innerHTML = `
+                    <div class="case-image">
+                        <img src="${caseStudy.image}" alt="${caseStudy.title}">
+                        <div class="case-overlay">
+                            <span class="case-category">${caseStudy.category}</span>
+                        </div>
+                    </div>
+                    <div class="case-content">
+                        <h3>${caseStudy.title}</h3>
+                        <p>${caseStudy.description}</p>
+                        <div class="case-results">
+                            <div class="result-item">
+                                <span class="result-value">${caseStudy.results.engagement}</span>
+                                <span class="result-label">Engagement</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-value">${caseStudy.results.growth}</span>
+                                <span class="result-label">Growth</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-value">${caseStudy.results.roi}</span>
+                                <span class="result-label">ROI</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Add animation delay
+                setTimeout(() => {
+                    caseCard.classList.add('animate');
+                }, 200 + (index * 200));
+
+                container.appendChild(caseCard);
+            });
+        }
+
+        // Scroll animations
+        function animateOnScroll() {
+            const serviceCards = document.querySelectorAll('.service-card:not(.animate)');
+            const caseCards = document.querySelectorAll('.case-card:not(.animate)');
+
+            serviceCards.forEach((card, index) => {
+                const cardPosition = card.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight * 0.85;
+
+                if (cardPosition < screenPosition) {
+                    setTimeout(() => {
+                        card.classList.add('animate');
+                    }, index * 100);
+                }
+            });
+
+            caseCards.forEach((card, index) => {
+                const cardPosition = card.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight * 0.85;
+
+                if (cardPosition < screenPosition) {
+                    setTimeout(() => {
+                        card.classList.add('animate');
+                    }, index * 150);
+                }
+            });
+        }
+
+        // Load navbar and footer
+        fetch("navbar.html")
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById("navbar-placeholder").innerHTML = data;
+                const script = document.createElement("script");
+                script.src = "navbar.js";
+                document.body.appendChild(script);
+            });
+
+        fetch("footer.html")
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById("footer-placeholder").innerHTML = data;
+            });
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            renderMarketingServices();
+            renderCaseStudies();
+            window.addEventListener('scroll', animateOnScroll);
+            setTimeout(animateOnScroll, 500);
+        });
+    </script>
+</body>
+
+</html>

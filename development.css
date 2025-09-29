@@ -1,0 +1,351 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #fff;
+  color: #111;
+  overflow-x: hidden;
+}
+
+/* ===== PAGE HEADING ===== */
+.page-heading {
+  text-align: center;
+  margin: 120px 0 50px;
+  /* increase from 80px */
+  padding-top: 20px;
+  /* optional extra spacing */
+}
+
+#navbar-placeholder {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.page-heading {
+  margin-top: 160px;
+  /* match navbar height */
+}
+
+.page-heading .sub-text {
+  font-size: 20px;
+  color: #777;
+  display: block;
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+}
+
+.page-heading .main-text {
+  font-size: 48px;
+  font-weight: 800;
+  color: #111;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== CATEGORY TITLES ===== */
+.category-title {
+  font-size: 34px;
+  font-weight: 800;
+  margin: 60px auto 30px;
+  color: #111;
+  text-align: center;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.category-title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: #111;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+/* ===== GRID ===== */
+.portfolio-grid {
+  display: grid;
+  gap: 25px;
+  padding: 0 60px 40px;
+  grid-template-columns: repeat(4, 1fr);
+  /* default: 4 per row */
+}
+
+@media (max-width: 1199px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(3, 1fr);
+    /* tablets: 3 per row */
+    padding: 0 40px 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+    /* mobile: full width */
+    padding: 0 20px 30px;
+  }
+}
+
+/* ===== PORTFOLIO CARD ===== */
+.portfolio-card {
+  background: #fafafa;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.portfolio-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.portfolio-card:hover {
+  transform: translateY(-5px);
+}
+
+.portfolio-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.portfolio-card h3 {
+  margin: 15px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.portfolio-card p {
+  margin: 0 15px 15px;
+  color: #555;
+  font-size: 14px;
+}
+
+/* ===== CALL TO ACTION (ABOUT SECTION) ===== */
+.about-section {
+  text-align: center;
+  padding: 80px 20px;
+  background: #fff;
+  /* keep it white to match theme */
+}
+
+.about-text {
+  font-size: 26px;
+  font-weight: 500;
+  color: #767474;
+  margin-bottom: 30px;
+  line-height: 1.4;
+}
+
+.about-text span {
+  color: #2a2a2a;
+  /* subtle highlight */
+  font-weight: 700;
+}
+
+.btn-about {
+  display: inline-block;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 30px;
+  border: 1px solid #000;
+  transition: all 0.3s ease;
+}
+
+.btn-about:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* ===== VIEW DETAILS BUTTON ===== */
+.portfolio-card .btn {
+  display: inline-block;
+  margin: 0 15px 20px;
+  padding: 10px 20px;
+  background: #111;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.portfolio-card .btn:hover {
+  background: #fff;
+  color: #111;
+  border: 2px solid #111;
+  transform: scale(1.05);
+}
+
+/* ===== MODAL ===== */
+.portfolio-modal {
+  display: flex;
+  position: fixed;
+  z-index: 5000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease;
+}
+
+.portfolio-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 14px;
+  max-width: 800px;
+  width: 90%;
+  padding: 20px;
+  text-align: center;
+  overflow-y: auto;
+  max-height: 90vh;
+  position: relative;
+  margin: auto;
+  transform: translateY(-30px);
+  transition: transform 0.4s ease;
+}
+
+.portfolio-modal.show .modal-content {
+  transform: translateY(0);
+}
+
+.modal-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 22px;
+  color: #333;
+  cursor: pointer;
+  background: #fff;
+  border-radius: 50%;
+  padding: 6px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s;
+}
+
+.close:hover {
+  background: #f0f0f0;
+}
+
+/* ===== TECH STACK ===== */
+.tech-stack {
+  margin: 15px 0;
+}
+
+.tech-stack .badge {
+  display: inline-block;
+  background: #e0e0e0;
+  color: #111;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  margin: 4px;
+  font-weight: 500;
+}
+
+/* ===== VIEW LIVE BUTTON ===== */
+.view-live-btn {
+  display: inline-block;
+  background: #111;
+  color: #fff;
+  padding: 10px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.view-live-btn:hover {
+  background: #fff;
+  color: #111;
+  border: 2px solid #111;
+  transform: scale(1.05);
+}
+
+/* ===== RESPONSIVENESS ===== */
+@media (max-width: 768px) {
+  .portfolio-grid {
+    gap: 15px;
+    padding: 0 20px 30px;
+  }
+
+  .portfolio-card img {
+    height: 160px;
+  }
+
+  .modal-content {
+    width: 92%;
+    padding: 15px;
+    max-height: 85vh;
+  }
+
+  .close {
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: 92%;
+    padding: 15px;
+  }
+
+  .close {
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+  }
+}

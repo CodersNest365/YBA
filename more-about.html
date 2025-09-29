@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - AX Creative</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="about.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- HERO SECTION -->
+  <section class="about-header">
+    <h3 class="about-subtitle">About AX Creative</h3>
+    <h1 class="about-title">Where Innovation Meets Creativity</h1>
+  </section>
+
+  <!-- OUR STORY -->
+  <section class="about-section">
+    <h5 class="about-subtitle">[ WHO WE ARE ]</h5>
+    <h2 class="about-text">
+      AX Creative was founded with one mission: to deliver bespoke digital
+      solutions that spark growth and innovation. <span>We are strategists,
+      designers, developers, and marketers</span> who work together to help
+      brands thrive in the digital world.
+    </h2>
+  </section>
+
+  <!-- OUR PROCESS -->
+  <section class="why-choose-us">
+    <div class="why-container">
+      <div class="why-left">
+        <h2 class="why-title">Our Approach</h2>
+        <p class="why-desc">Every project we take on follows a proven process that ensures quality and innovation:</p>
+      </div>
+      <div class="why-right">
+        <div class="why-item">
+          <div class="icon-circle"><i data-lucide="search"></i></div>
+          <h4>Discovery</h4>
+          <p>We begin with deep research and understanding your goals.</p>
+        </div>
+        <div class="why-item">
+          <div class="icon-circle"><i data-lucide="pen-tool"></i></div>
+          <h4>Design</h4>
+          <p>Creative solutions tailored for maximum engagement and impact.</p>
+        </div>
+        <div class="why-item">
+          <div class="icon-circle"><i data-lucide="code"></i></div>
+          <h4>Development</h4>
+          <p>Building scalable, secure, and high-performing digital products.</p>
+        </div>
+        <div class="why-item">
+          <div class="icon-circle"><i data-lucide="check-circle"></i></div>
+          <h4>Delivery</h4>
+          <p>On-time launches with post-support and optimization.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM SECTION -->
+  <section class="stats">
+    <div class="stat">
+      <h2>20+</h2>
+      <p>Team Members</p>
+    </div>
+    <div class="stat">
+      <h2>30+</h2>
+      <p>Projects Completed</p>
+    </div>
+    <div class="stat">
+      <h2>95+</h2>
+      <p>Clients Served</p>
+    </div>
+    <div class="stat">
+      <h2>99%</h2>
+      <p>Client Satisfaction</p>
+    </div>
+  </section>
+
+  <!-- CALL TO ACTION -->
+  <section class="about-section">
+    <h2 class="about-text">
+      Want to know how we can <span>help your business grow?</span>
+    </h2>
+    <a href="become-a-client.html" class="btn-about">Lets Talk </a>
+  </section>
+
+  <!-- FOOTER -->
+  <div id="footer-placeholder"></div>
+
+  <!-- SCRIPTS -->
+  <script src="script.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>lucide.createIcons();</script>
+  <script>
+    // Load navbar dynamically + attach JS
+    fetch("navbar.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("navbar-placeholder").innerHTML = data;
+        const script = document.createElement("script");
+        script.src = "navbar.js";
+        document.body.appendChild(script);
+      });
+
+    // Load footer dynamically
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("footer-placeholder").innerHTML = data);
+  </script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!-- navbar.html -->
+<nav id="mainNav">
+  <!-- Logo -->
+  <a href="index.html" class="logo">AX CREATIVE</a>
+
+  <!-- Nav links (center) -->
+  <div class="nav-links" id="nav-links">
+    <a href="index.html#home">Home</a>
+    <a href="index.html#services">Services</a>
+    <a href="index.html#about">About</a>
+    <a href="blogs.html">Blogs</a>
+  </div>
+
+  <!-- CTA Button (right end) -->
+  <a href="become-a-client.html" class="contact-btn">Become a Client</a>
+
+  <!-- Hamburger (mobile only) -->
+  <div class="hamburger" id="hamburger">☰</div>
+
+  <!-- Mobile side menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html#home"><i data-lucide="home"></i> Home</a>
+    <a href="index.html#services"><i data-lucide="layers"></i> Services</a>
+    <a href="index.html#about"><i data-lucide="info"></i> About</a>
+    <a href="blogs.html"><i data-lucide="book-open"></i> Blogs</a>
+    <a href="become-a-client.html"><i data-lucide="user-plus"></i> Become a Client</a>
+  </div>
+</nav>
+
+<style>
+/* NAVBAR BASE */
+#mainNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+#mainNav.scrolled {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo */
+.logo {
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-decoration: none;
+  color: black;
+}
+
+/* Nav links center */
+.nav-links {
+  display: flex;
+  gap: 30px;
+  margin: 0 auto; /* centers nav links */
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* CTA button (right end) */
+.contact-btn {
+  background: #000;
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.contact-btn:hover {
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
+
+/* Hamburger (hidden on desktop) */
+.hamburger {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: -300px; /* hidden off screen */
+  height: 100vh;
+  width: 260px;
+  background: white;
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  padding: 40px 20px;
+  gap: 20px;
+  transition: left 0.3s ease;
+  z-index: 2000;
+}
+
+.mobile-menu.active {
+  left: 0; /* slide in */
+}
+
+.mobile-menu a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #111;
+  font-size: 15px;
+  padding: 10px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu a:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .nav-links,
+  .contact-btn {
+    display: none;
+  }
+  .hamburger {
+    display: block;
+  }
+}
+</style>

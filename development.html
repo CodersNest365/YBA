@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Development Portfolio - AX Creative</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="development.css">
+</head>
+
+<body>
+  <!-- NavBar -->
+  <div id="navbar-placeholder"></div>
+  <!-- Page Heading -->
+  <section class="page-heading">
+    <span class="sub-text">OUR</span>
+    <span class="main-text">DEVELOPMENT PROJECTS</span>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section class="portfolio" id="portfolio-section">
+    <!-- JS will inject categories and cards -->
+  </section>
+
+  <!-- Modal -->
+  <div id="portfolioModal" class="portfolio-modal">
+    <div class="modal-content">
+      <button class="close" onclick="closeModal()" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <img id="modalImg" src="" alt="Project Image">
+      <h2 id="modalTitle"></h2>
+      <p id="modalDesc"></p>
+      <div id="modalStack" class="tech-stack"></div>
+      <a id="modalLink" href="#" target="_blank" class="view-live-btn">View Live</a>
+    </div>
+  </div>
+    <!-- CALL TO ACTION -->
+  <section class="about-section">
+    <h2 class="about-text">
+      Let's Create Your <span>Next Big Idea</span>
+    </h2>
+    <a href="become-a-client.html" class="btn-about">Lets Talk </a>
+  </section>
+  <!-- ========== FOOTER ========== -->
+  <div id="footer-placeholder"></div>
+
+  <script>
+    // ===== Project Data =====
+    const projects = {
+      "Full-Stack Development": [
+        {
+          title: "Project Alpha",
+          desc: "A MERN stack web app with user authentication and dashboards.",
+          img: "images/Development/Alpha.png",
+          stack: ["MongoDB", "Express", "React", "Node"],
+          link: "#"
+        },
+        {
+          title: "Project Beta",
+          desc: "REST API + React frontend for scalable e-commerce.",
+          img: "images/Development/Beta.png",
+          stack: ["HTML", "CSS", "JavaScript"],
+          link: "#"
+        },
+        {
+          title: "Project Beta",
+          desc: "REST API + React frontend for scalable e-commerce.",
+          img: "images/Development/Beta.png",
+          stack: ["HTML", "CSS", "JavaScript"],
+          link: "#"
+        }
+      ],
+      "WordPress Themes": [
+        {
+          title: "Creative Blog Theme",
+          desc: "Customizable blog theme built on WordPress.",
+          img: "images/Development/Creative Blog.jpg",
+          stack: ["WordPress", "PHP", "Elementor"],
+          link: "#"
+        },
+        {
+          title: "Business Pro Theme",
+          desc: "Corporate theme with Elementor & WooCommerce support.",
+          img: "images/Development/Business Pro.jpg",
+          stack: ["WordPress", "WooCommerce"],
+          link: "#"
+        }
+      ],
+      "HTML, CSS & JS": [
+        {
+          title: "Landing Page",
+          desc: "Responsive product landing page.",
+          img: "images/Development/Landing page.jpeg",
+          stack: ["HTML", "CSS", "JS"],
+          link: "#"
+        },
+        {
+          title: "Portfolio Site",
+          desc: "Personal branding portfolio website.",
+          img: "images/Development/Portfolio.jpeg",
+          stack: ["HTML", "CSS", "JS"],
+          link: "#"
+        }
+      ]
+    };
+
+    // ===== Render Projects =====
+    const portfolioSection = document.getElementById("portfolio-section");
+
+    Object.keys(projects).forEach(category => {
+      const categoryTitle = document.createElement("h2");
+      categoryTitle.className = "category-title";
+      categoryTitle.textContent = category;
+      portfolioSection.appendChild(categoryTitle);
+
+      const grid = document.createElement("div");
+      grid.className = "portfolio-grid";
+
+      projects[category].forEach(project => {
+        const card = document.createElement("div");
+        card.className = "portfolio-card fade-in";
+        card.innerHTML = `
+          <img src="${project.img}" alt="${project.title}">
+          <h3>${project.title}</h3>
+          <p>${project.desc}</p>
+          <a href="#" class="btn">View Details</a>
+        `;
+        // Buttons
+        card.querySelector(".btn").addEventListener("click", (e) => {
+          e.preventDefault();
+          openModal(project.title, project.desc, project.img, project.stack, project.link);
+        });
+        grid.appendChild(card);
+      });
+
+      portfolioSection.appendChild(grid);
+    });
+
+    // ===== Modal Functions =====
+    function openModal(title, desc, img, stack = [], link = "#") {
+      document.getElementById("modalTitle").innerText = title;
+      document.getElementById("modalDesc").innerText = desc;
+      document.getElementById("modalImg").src = img;
+      document.getElementById("modalStack").innerHTML =
+        stack.map(t => `<span class="badge">${t}</span>`).join("");
+      document.getElementById("modalLink").href = link;
+      document.getElementById("portfolioModal").classList.add("show");
+    }
+
+    function closeModal() {
+      document.getElementById("portfolioModal").classList.remove("show");
+    }
+
+    const modal = document.getElementById("portfolioModal");
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+
+    // ===== Fade-in on Scroll =====
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    // Load footer dynamically
+    fetch("footer.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("footer-placeholder").innerHTML = data;
+      });
+
+    // Load navbar dynamically + attach JS
+    fetch("navbar.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("navbar-placeholder").innerHTML = data;
+
+        // After navbar is injected, load its JS
+        const script = document.createElement("script");
+        script.src = "navbar.js";
+        document.body.appendChild(script);
+      });
+  </script>
+
+</body>
+
+</html>

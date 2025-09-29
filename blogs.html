@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Showcase</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="blogs.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <div id="navbar">
+    <div id="navbar-placeholder"></div>
+  </div>
+
+  <!-- Case Studies Heading -->
+  <section class="case-studies-heading">
+    <h2>Case Studies & Project Stories</h2>
+    <p>Dive deep into our projects, technologies, and problem-solving journeys.</p>
+    <!-- Search Icon -->
+    <div class="search-icon-container">
+      <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Blogs Section -->
+  <section class="blogs-list" id="blogsContainer">
+    <!-- Blog cards will be dynamically inserted here -->
+  </section>
+
+  <!-- Blog Modal -->
+  <div id="blogModal" class="blog-modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeBlog()">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <span id="modalMeta" class="modal-meta"></span>
+      <div id="modalContent" class="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div id="footer">
+    <div id="footer-placeholder"></div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="blogs-data.js"></script>
+  <script>
+    // Render blog posts dynamically with animations
+    function renderBlogPosts() {
+      const container = document.getElementById('blogsContainer');
+
+      blogPosts.forEach((post, index) => {
+        const blogCard = document.createElement('div');
+        blogCard.className = 'blog-card';
+        blogCard.setAttribute('data-id', post.id);
+
+        blogCard.innerHTML = `
+      ${post.image ? `<img src="${post.image}" alt="${post.title}" class="blog-image">` : ''}
+      <div class="blog-content">
+        <span class="category">${post.category}</span>
+        <h3>${post.title}</h3>
+        <span class="meta">${post.meta}</span>
+        <p>${post.excerpt}</p>
+        <a class="read-more">Read more →</a>
+      </div>
+    `;
+
+        blogCard.addEventListener('click', () => openBlog(post.id));
+        container.appendChild(blogCard);
+
+        setTimeout(() => {
+          blogCard.classList.add('animate');
+        }, 100 + (index * 100));
+      });
+    }
+
+    // Open blog modal with animations
+    function openBlog(postId) {
+      const post = blogPosts.find(p => p.id === postId);
+      if (!post) return;
+
+      document.getElementById("modalTitle").textContent = post.title;
+      document.getElementById("modalMeta").textContent = post.meta;
+      document.getElementById("modalContent").innerHTML = post.fullContent;
+
+      const modal = document.getElementById("blogModal");
+      modal.style.display = 'flex';
+
+      setTimeout(() => {
+        modal.classList.add('show');
+      }, 10);
+
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Close blog modal with animations
+    function closeBlog() {
+      const modal = document.getElementById("blogModal");
+      modal.classList.remove('show');
+
+      document.body.style.overflow = 'auto';
+
+      setTimeout(() => {
+        modal.style.display = 'none';
+      }, 400);
+    }
+
+    // Scroll animations for blog cards
+    function animateOnScroll() {
+      const blogCards = document.querySelectorAll('.blog-card:not(.animate)');
+
+      blogCards.forEach((card, index) => {
+        const cardPosition = card.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight * 0.85;
+
+        if (cardPosition < screenPosition) {
+          setTimeout(() => {
+            card.classList.add('animate');
+          }, index * 100);
+        }
+      });
+    }
+
+    // Search functionality with proper state management
+    let isSearchOpen = false;
+    let searchOverlay = null;
+
+    function initSearch() {
+      const searchIcon = document.querySelector('.search-icon-container .search-icon');
+      const searchIconContainer = document.querySelector('.search-icon-container');
+
+      searchIcon.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (!isSearchOpen) {
+          openSearch();
+        }
+      });
+
+      function openSearch() {
+        let searchContainer = document.querySelector('.search-container');
+
+        if (!searchContainer) {
+          // Create search container
+          searchContainer = document.createElement('div');
+          searchContainer.className = 'search-container';
+          searchContainer.innerHTML = `
+        <div class="search-input-container">
+          <svg class="search-icon-inside" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" class="search-input" placeholder="Search blogs..." id="blogSearch">
+          <button class="close-search" aria-label="Close search">×</button>
+        </div>
+      `;
+
+          searchIconContainer.parentNode.insertBefore(searchContainer, searchIconContainer.nextSibling);
+        }
+
+        // Create overlay if it doesn't exist
+        if (!searchOverlay) {
+          searchOverlay = document.createElement('div');
+          searchOverlay.className = 'search-overlay';
+          document.body.appendChild(searchOverlay);
+
+          searchOverlay.addEventListener('click', closeSearch);
+        }
+
+        // Animate icon to search bar
+        searchIconContainer.style.opacity = '0';
+        setTimeout(() => {
+          searchIconContainer.style.display = 'none';
+          searchContainer.style.display = 'block';
+          setTimeout(() => {
+            searchContainer.classList.add('active');
+            searchOverlay.classList.add('active');
+            isSearchOpen = true;
+          }, 50);
+        }, 300);
+
+        // Focus on input
+        setTimeout(() => {
+          const searchInput = document.getElementById('blogSearch');
+          searchInput.focus();
+
+          // Add search functionality
+          searchInput.addEventListener('input', function (e) {
+            const searchTerm = e.target.value.toLowerCase();
+            filterBlogs(searchTerm);
+          });
+
+          // Close search events
+          const closeBtn = searchContainer.querySelector('.close-search');
+          closeBtn.addEventListener('click', closeSearch);
+
+          searchInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+              closeSearch();
+            }
+          });
+
+        }, 400);
+
+        // Prevent click inside search container from closing
+        searchContainer.addEventListener('click', function (e) {
+          e.stopPropagation();
+        });
+      }
+
+      function closeSearch() {
+        if (!isSearchOpen) return;
+
+        const searchContainer = document.querySelector('.search-container');
+        const searchIconContainer = document.querySelector('.search-icon-container');
+        const searchInput = document.getElementById('blogSearch');
+
+        if (searchContainer) {
+          searchContainer.classList.remove('active');
+          if (searchOverlay) {
+            searchOverlay.classList.remove('active');
+          }
+
+          setTimeout(() => {
+            searchContainer.style.display = 'none';
+            searchIconContainer.style.display = 'flex';
+            setTimeout(() => {
+              searchIconContainer.style.opacity = '1';
+              isSearchOpen = false;
+            }, 50);
+
+            // Clear search results but keep the search input value
+            if (searchInput) {
+              filterBlogs('');
+            }
+          }, 300);
+        }
+      }
+
+      // Close search when clicking anywhere on the page (except the search itself)
+      document.addEventListener('click', function (e) {
+        if (isSearchOpen && !e.target.closest('.search-container') && !e.target.closest('.search-icon-container')) {
+          closeSearch();
+        }
+      });
+    }
+
+    // Filter blogs function
+    function filterBlogs(searchTerm) {
+      const blogCards = document.querySelectorAll('.blog-card');
+      let hasResults = false;
+
+      blogCards.forEach(card => {
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        const excerpt = card.querySelector('p').textContent.toLowerCase();
+        const category = card.querySelector('.category').textContent.toLowerCase();
+
+        if (searchTerm === '' || title.includes(searchTerm) || excerpt.includes(searchTerm) || category.includes(searchTerm)) {
+          card.style.display = 'block';
+          hasResults = true;
+          // Re-trigger animation for filtered cards
+          if (!card.classList.contains('animate')) {
+            card.classList.add('animate');
+          }
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Show no results message
+      let noResults = document.getElementById('noResults');
+      if (!hasResults && searchTerm) {
+        if (!noResults) {
+          noResults = document.createElement('div');
+          noResults.id = 'noResults';
+          noResults.className = 'no-results';
+          noResults.innerHTML = `<p>No blogs found matching "${searchTerm}"</p>`;
+          document.getElementById('blogsContainer').appendChild(noResults);
+        }
+      } else if (noResults) {
+        noResults.remove();
+      }
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('blogModal').addEventListener('click', function (e) {
+      if (e.target === this) closeBlog();
+    });
+
+    // Close modal with ESC key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeBlog();
+    });
+
+    // Load navbar and footer
+    fetch("navbar.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("navbar-placeholder").innerHTML = data;
+        const script = document.createElement("script");
+        script.src = "navbar.js";
+        document.body.appendChild(script);
+      });
+
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("footer-placeholder").innerHTML = data;
+      });
+
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', function () {
+      renderBlogPosts();
+      initSearch();
+
+      window.addEventListener('scroll', animateOnScroll);
+      setTimeout(animateOnScroll, 500);
+    });
+  </script>
+</body>
+
+</html>

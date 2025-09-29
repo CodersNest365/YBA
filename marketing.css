@@ -1,0 +1,418 @@
+body {
+            font-family: 'Inter', sans-serif;
+            background: #fff;
+            color: #111;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ===== ANIMATION KEYFRAMES ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== PAGE HEADING ===== */
+        .page-heading {
+            text-align: center;
+            padding: 160px 20px 60px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+        }
+
+        .page-heading .sub-text {
+            font-size: 18px;
+            color: #666;
+            display: block;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.5s forwards;
+        }
+
+        .page-heading .main-text {
+            font-size: 48px;
+            font-weight: 800;
+            color: #111;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease 0.7s forwards;
+        }
+
+        /* ===== MARKETING GRID ===== */
+        .marketing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 0 60px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: #f5f5f5;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(50px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .service-card.animate {
+            animation: slideUp 0.6s ease forwards;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+            background: #f0f0f0;
+        }
+
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease 0.1s;
+            color: #333;
+        }
+
+        .service-card.animate .service-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .service-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #111;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease 0.2s;
+        }
+
+        .service-card.animate h3 {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease 0.3s;
+        }
+
+        .service-card.animate p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 25px 0;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease 0.4s;
+        }
+
+        .service-card.animate .service-features {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-features li {
+            padding: 8px 0;
+            color: #555;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .service-features li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #111;
+            font-weight: 600;
+        }
+
+        /* ===== CASE STUDIES ===== */
+        .case-studies {
+            background: #fff;
+            padding: 80px 20px;
+        }
+
+        .case-studies-heading {
+            text-align: center;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .case-studies-heading h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: #111;
+        }
+
+        .case-studies-heading p {
+            font-size: 18px;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .case-studies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .case-card {
+            background: #f5f5f5;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .case-card.animate {
+            animation: slideUp 0.6s ease forwards;
+        }
+
+        .case-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+            background: #f0f0f0;
+        }
+
+        .case-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .case-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .case-card:hover .case-image img {
+            transform: scale(1.05);
+        }
+
+        .case-overlay {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+        }
+
+        .case-category {
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .case-content {
+            padding: 25px;
+        }
+
+        .case-content h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #111;
+        }
+
+        .case-content p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .case-results {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .result-item {
+            text-align: center;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+        }
+
+        .result-value {
+            display: block;
+            font-size: 24px;
+            font-weight: 800;
+            color: #111;
+            margin-bottom: 5px;
+        }
+
+        .result-label {
+            font-size: 12px;
+            color: #666;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== CTA SECTION ===== */
+        .marketing-cta {
+            text-align: center;
+            padding: 80px 20px;
+            background: #fff;
+            color: #111;
+        }
+
+        .marketing-cta h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+        }
+
+        .marketing-cta p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease 0.5s forwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 35px;
+            background: #111;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: 2px solid #111;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease 0.7s forwards;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: #111;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 1024px) {
+            .marketing-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                padding: 0 40px 60px;
+            }
+            .case-studies-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-heading .main-text {
+                font-size: 36px;
+            }
+            .marketing-grid {
+                grid-template-columns: 1fr;
+                padding: 0 20px 40px;
+                gap: 20px;
+            }
+            .case-studies-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .case-studies {
+                padding: 60px 20px;
+            }
+            .case-studies-heading h2 {
+                font-size: 28px;
+            }
+            .service-card {
+                padding: 25px;
+            }
+            .marketing-cta h2 {
+                font-size: 28px;
+            }
+            .marketing-cta p {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-heading {
+                padding: 80px 20px 40px;
+            }
+            .page-heading .main-text {
+                font-size: 32px;
+            }
+            .service-card {
+                padding: 20px;
+            }
+            .case-content {
+                padding: 20px;
+            }
+            .case-results {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .result-item {
+                padding: 12px;
+            }
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 14px;
+            }
+        }

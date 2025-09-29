@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Become a Client - AX Creative</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="client.css">
+</head>
+
+<body>
+  <!-- Navbar placeholder -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- CONTACT SECTION -->
+  <section class="contact-section">
+    <div class="left">
+      <h4 class="subtitle">GET IN TOUCH</h4>
+      <h1 class="title">BECOME A CLIENT</h1>
+    </div>
+    <div class="right">
+      <form action="https://formspree.io/f/mrbygeqb" method="POST" class="contact-form">
+        <label>Name *</label>
+        <input type="text" name="name" placeholder="Your Full Name" required>
+
+        <label>Email *</label>
+        <input type="email" name="email" placeholder="your@gmail.com" required>
+
+        <label>Phone *</label>
+        <input type="text" name="phone" placeholder="Your Best Whatsapp Contact" required>
+
+        <label>Project Budget</label>
+        <input type="text" name="budget" placeholder="<$5000">
+
+        <label>Message *</label>
+        <textarea name="message" placeholder="Type your message here..." rows="5" required></textarea>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Company Marquee Section -->
+  <section class="marquee">
+    <div class="marquee-content">
+      <span>AX CREATIVE</span>
+      <span>AX CREATIVE</span>
+      <span>AX CREATIVE</span>
+      <span>AX CREATIVE</span>
+      <span>AX CREATIVE</span>
+      <span>AX CREATIVE</span>
+    </div>
+  </section>
+
+  <!-- Footer placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script>
+    // Load navbar dynamically + attach JS
+    fetch("navbar.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("navbar-placeholder").innerHTML = data;
+
+        // After navbar is injected, load its JS
+        const script = document.createElement("script");
+        script.src = "navbar.js";
+        document.body.appendChild(script);
+      });
+
+    // Load footer dynamically
+    fetch("footer.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("footer-placeholder").innerHTML = data;
+      });
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons(); // initialize icons
+  </script>
+</body>
+
+</html>

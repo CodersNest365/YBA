@@ -1,0 +1,49 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+.talk-section {
+  text-align: center;
+  padding: 50px 20px;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.talk-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.talk-form input, 
+.talk-form textarea {
+  margin: 10px 0;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.btn-letstalk {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 25px;
+  background: #000;
+  color: #fff;
+  border-radius: 25px;
+  text-decoration: none;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.btn-letstalk:hover {
+  background: #ff4c29;
+  transform: scale(1.1);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}

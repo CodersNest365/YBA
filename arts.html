@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="arts.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- NavBar -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section class="hero">
+        <h1 id="line1">Portfolio Will be launched</h1>
+        <h2 id="line2">Services are Available</h2>
+    </section>
+    <!-- CALL TO ACTION -->
+    <section class="about-section">
+        <h2 class="about-text">
+            Let's Create Your <span>Next Big Idea</span>
+        </h2>
+        <a href="become-a-client.html" class="btn-about">Lets Talk </a>
+    </section>
+    <!-- ========== FOOTER ========== -->
+    <div id="footer-placeholder"></div>
+    <script>
+        // Load footer dynamically
+        fetch("footer.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("footer-placeholder").innerHTML = data;
+            });
+
+        // Load navbar dynamically + attach JS
+        fetch("navbar.html")
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById("navbar-placeholder").innerHTML = data;
+
+                // After navbar is injected, load its JS
+                const script = document.createElement("script");
+                script.src = "navbar.js";
+                document.body.appendChild(script);
+            });
+    </script>
+</body>
+
+</html>

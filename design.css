@@ -1,0 +1,359 @@
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  background: #fff;
+  color: #111;
+}
+
+/* ===== PAGE HEADING ===== */
+.page-heading {
+  text-align: center;
+  margin: 100px 0 60px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.page-heading .gray-text {
+  display: block;
+  color: #999;
+  font-weight: 400;
+  font-size: 28px;
+  margin-bottom: 8px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease 0.2s forwards;
+}
+
+.page-heading .black-text {
+  display: block;
+  color: #111;
+  font-weight: 800;
+  font-size: 48px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease 0.4s forwards;
+}
+
+/* ===== PINTEREST GRID ===== */
+.pin-gallery {
+  column-count: 4;
+  column-gap: 20px;
+  padding: 0 60px 40px;
+}
+
+.pin {
+  break-inside: avoid;
+  margin-bottom: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.pin.animate {
+  animation: cardSlideUp 0.6s ease forwards;
+}
+
+.pin:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.pin img {
+  width: 100%;
+  border-radius: 12px 12px 0 0;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.pin:hover img {
+  transform: scale(1.03);
+}
+
+.pin-desc {
+  padding: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* ===== MODAL ===== */
+.pin-modal {
+  display: none;
+  position: fixed;
+  z-index: 5000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.pin-modal.show {
+  opacity: 1;
+}
+
+.pin-modal .modal-content {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+  overflow-y: auto;
+  max-height: 90vh;
+  position: relative;
+  box-sizing: border-box;
+  transform: scale(0.8) translateY(50px);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.pin-modal.show .modal-content {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+/* Modal image */
+.modal-img {
+  position: relative;
+  z-index: 1;
+}
+
+.modal-img img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  transform: scale(0.9);
+  opacity: 0;
+  transition: all 0.5s ease 0.2s;
+  position: relative;
+  z-index: 1;
+}
+
+.pin-modal.show .modal-img img {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.modal-info {
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.4s ease 0.3s;
+  position: relative;
+  z-index: 1;
+}
+
+.pin-modal.show .modal-info {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Close Button */
+.close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 22px;
+  color: #333;
+  cursor: pointer;
+  background: #fff;
+  border-radius: 50%;
+  padding: 6px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  transform: scale(0);
+  z-index: 1000; /* Higher z-index to ensure it's on top */
+}
+
+.pin-modal.show .close {
+  transform: scale(1);
+  transition-delay: 0.4s;
+}
+
+.close:hover {
+  background: #f0f0f0;
+  transform: scale(1.1);
+}
+
+/* Modal image */
+.modal-img img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  transform: scale(0.9);
+  opacity: 0;
+  transition: all 0.5s ease 0.2s;
+}
+
+.pin-modal.show .modal-img img {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.modal-info {
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.4s ease 0.3s;
+}
+
+.pin-modal.show .modal-info {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Close Button */
+.close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 22px;
+  color: #333;
+  cursor: pointer;
+  background: #fff;
+  border-radius: 50%;
+  padding: 6px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  transform: scale(0);
+}
+
+.pin-modal.show .close {
+  transform: scale(1);
+  transition-delay: 0.4s;
+}
+
+.close:hover {
+  background: #f0f0f0;
+  transform: scale(1.1);
+}
+
+/* ===== CALL TO ACTION ===== */
+.about-section {
+  text-align: center;
+  padding: 80px 20px;
+  background: #fff;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease;
+}
+
+.about-section.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-text {
+  font-size: 26px;
+  font-weight: 500;
+  color: #767474;
+  margin-bottom: 30px;
+}
+
+.about-text span {
+  color: #2a2a2a;
+  font-weight: 700;
+}
+
+.btn-about {
+  display: inline-block;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  background: #000;
+  color: #fff;
+  border-radius: 30px;
+  border: 1px solid #000;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.5s ease 0.2s;
+}
+
+.about-section.animate .btn-about {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.btn-about:hover {
+  background: #fff;
+  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== ANIMATION KEYFRAMES ===== */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== RESPONSIVENESS ===== */
+@media (max-width: 1200px) {
+  .pin-gallery {
+    column-count: 3;
+    padding: 0 40px 30px;
+  }
+}
+
+@media (max-width: 900px) {
+  .pin-gallery {
+    column-count: 2;
+    padding: 0 30px 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .pin-gallery {
+    column-count: 1;
+    padding: 0 28px 30px;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .pin {
+    max-width: 100%;
+  }
+
+  .pin-modal .modal-content {
+    width: 92%;
+    margin: 20px auto;
+    padding: 15px;
+  }
+
+  .close {
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+  }
+}
